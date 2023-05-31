@@ -131,9 +131,7 @@
                         <h1 id="noKamar"></h1>
                     </div>
                     <div class="mb-4" id="rating"></div>
-                    <p class="mb-1" id="deskripsi">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut eum
-                        error optio. Officia odit ratione magnam dolorum voluptatibus dolor quod nemo placeat obcaecati
-                        aliquam quos alias eveniet, eos ut eius.</p>
+                    <p class="mb-1" id="deskripsi"></p>
 
                     <div class="row">
                         <div class="col-6 col-sm-6 col-md-4 col-lg-4 mt-3">
@@ -265,7 +263,7 @@
     <script>
         $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
-            const nomorKamar = urlParams.get('nomor');
+            let nomorKamar = urlParams.get('nomor');
             $.ajax({
                 url: `https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/kamar/detail?nomor=${nomorKamar}`,
                 method: 'GET',
@@ -276,7 +274,7 @@
                         window.location.replace("index.html");
                     } else {
                         $("#namaKamar").text(data.nama);
-                        $("#noKamar").text("(" + nomorKamar + ")");
+                        $("#noKamar").text("(" + data.nomor + ")");
                         $("#rating").html(generateRatingStars(data.rating));
                         $("#deskripsi").text(data.deskripsi + "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut euerror optio. Officia odit ratione magnam dolorum voluptatibus dolor quod nemo placeat obcaecati. ");
                         $("#kategori").text(data.kategori);
