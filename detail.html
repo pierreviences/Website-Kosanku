@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hotelier - Hotel HTML Template</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <div id="spinner"
+            class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-dark px-0 ">
+            <div class="row gx-0">
+                <div class="col-lg-3 bg-dark d-none d-lg-block">
+                    <a href="index.html"
+                        class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
+                        <h1 class="m-0 text-primary text-uppercase">Kosanku</h1>
+                    </a>
+                </div>
+                <div class="col-lg-9">
+                    <nav class="navbar navbar-expand-lg bg-dark navbar-dark p-3 p-lg-0">
+                        <a href="index.html" class="navbar-brand d-block d-lg-none">
+                            <h1 class="m-0 text-primary text-uppercase">Kosanku</h1>
+                        </a>
+                        <button type="button" class="navbar-toggler" data-bs-toggle="collapse"
+                            data-bs-target="#navbarCollapse">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                            <div class="navbar-nav mr-auto py-0">
+
+                            </div>
+                            <div class="navbar-nav ml-auto py-0">
+                                <a href="index.html" class="nav-item nav-link ">Home</a>
+                                <a href="about.html" class="nav-item nav-link">My App</a>
+                                <a href="room.html" class="nav-item nav-link">Kamar</a>
+                                <a href="contact.html" class="nav-item nav-link">kontak</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+
+
+        <!-- Page Header Start -->
+        <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/kamarutama.png);">
+            <div class="container-fluid page-header-inner py-5">
+                <div class="container text-center pb-5">
+                    <h1 class="display-3 text-white mb-3 animated slideInDown">Detail Kamar</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb justify-content-center text-uppercase">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Kamar</a></li>
+                            <li class="breadcrumb-item text-white active" aria-current="page">Detail Kamar</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- Page Header End -->
+
+
+
+
+
+
+        <!-- Detail Kamar -->
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#roomCarousel"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#roomCarousel"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h6 class="section-title text-start text-primary text-uppercase">Detail Kamar</h6>
+                    <div class="gabungan mb-4">
+                        <h1 id="namaKamar"></h1>
+                        <h1 id="noKamar"></h1>
+                    </div>
+                    <div class="mb-4" id="rating"></div>
+                    <p class="mb-1" id="deskripsi">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut eum
+                        error optio. Officia odit ratione magnam dolorum voluptatibus dolor quod nemo placeat obcaecati
+                        aliquam quos alias eveniet, eos ut eius.</p>
+
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 mt-3">
+                            <div class="feature text-center">
+                                <i class="fa fa-user fa-2x text-primary mb-2"></i>
+                                <p class="mb-0" style="font-size: 18px;" id="kategori"></p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 mt-3">
+                            <div class="feature text-center">
+                                <i class="fa fa-bed fa-2x text-primary mb-2"></i>
+                                <p class="mb-0" style="font-size: 18px;" id="jenis"></p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 mt-3">
+                            <div class="feature text-center">
+                                <i class="fa fa-money-bill fa-2x text-primary mb-2"></i>
+                                <p class="mb-0" style="font-size: 18px;" id="harga"></p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 mt-3">
+                            <div class="feature text-center">
+                                <i class="fa fa-check fa-2x text-primary mb-2"></i>
+                                <p class="mb-0" style="font-size: 18px;" id="status"></p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 mt-3">
+                            <div class="feature text-center">
+                                <i class="fa fa-wifi fa-2x text-primary mb-2"></i>
+                                <p class="mb-0" style="font-size: 18px;"> Wi-Fi</p>
+                            </div>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 mt-3">
+                            <div class="feature text-center">
+                                <i class="fa fa-expand fa-2x text-primary mb-2"></i>
+                                <p class="mb-0" style="font-size: 18px;"> 4x3 M</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn btn-primary py-3 px-5" style="margin-top: 20px" href="">Pesan Sekarang</a>
+                </div>
+            </div>
+        </div>
+        <!-- Detail Kamar-->
+
+
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer wow fadeIn mt-5" data-wow-delay="0.1s">
+            <div class="container pb-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="bg-primary rounded p-4">
+                            <a href="index.html">
+                                <h1 class="text-white text-uppercase mb-3">KOSANKU</h1>
+                            </a>
+                            <p class="text-white mb-0 text-justify">
+                                Download <a class="text-dark fw-medium"
+                                    href="https://htmlcodex.com/hotel-html-template-pro">Kosanku – Aplikasi Android.</a>
+                                Dengan aplikasi ini kamu dapat memesan kamar kos menjadi lebih mudah dan cepat serta
+                                efisien, yuk download sekarang.
+
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <h6 class="section-title text-start text-primary text-uppercase mb-4">KONTAK</h6>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Bogor Tengah, Kota Bogor</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>081384504477</p>
+                        <p class="mb-2"><i class="fa fa-envelope me-3"></i>kelompok2@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-whatsapp"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-md-12">
+                        <div class="row gy-5 g-4">
+                            <div class="col-md-6">
+                                <h6 class="section-title text-start text-primary text-uppercase mb-4">Fitur</h6>
+                                <a class="btn btn-link" href="">Home</a>
+                                <a class="btn btn-link" href="">My App</a>
+                                <a class="btn btn-link" href="">Jelajahi Kamar</a>
+                                <a class="btn btn-link" href="">Kontak</a>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="section-title text-start text-primary text-uppercase mb-4">Fasilitas</h6>
+                                <a class="btn btn-link" href="">Kamar Mandi</a>
+                                <a class="btn btn-link" href="">Dapur Bersama</a>
+                                <a class="btn btn-link" href="">Akses Internet</a>
+                                <a class="btn btn-link" href="">Tempat Parkir</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row">
+                        <div class="col-md-12 text-center text-md-start mb-3 mb-md-0">
+                            &copy; <a class="border-bottom" href="#">Kosanku</a>, Hak cipta dilindungi Undang-undang.
+
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            Dirancang oleh <a class="border-bottom" href="#">Kelompok 2</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/tempusdominus/js/moment.min.js"></script>
+    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+    <script src="js/main.js"></script>
+    <script>
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nomorKamar = urlParams.get('nomor');
+            $.ajax({
+                url: `https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/kamar/detail?nomor=${nomorKamar}`,
+                method: 'GET',
+                success: function (data) {
+                    if (data === null || data === "null") {
+                        // Nomor kamar tidak ditemukan
+                        console.log("Nomor kamar tidak ditemukan");
+                        window.location.replace("index.html");
+                    } else {
+                        $("#namaKamar").text(data.nama);
+                        $("#noKamar").text("(" + nomorKamar + ")");
+                        $("#rating").html(generateRatingStars(data.rating));
+                        $("#deskripsi").text(data.deskripsi + "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut euerror optio. Officia odit ratione magnam dolorum voluptatibus dolor quod nemo placeat obcaecati. ");
+                        $("#kategori").text(data.kategori);
+                        $("#jenis").text(data.Jenis);
+                        $("#harga").text(data.harga);
+                        $("#status").text(data.status);
+
+                        // Mengisi gambar kamar
+                        const carouselInner = $("#roomCarousel .carousel-inner");
+                        carouselInner.empty();
+                        data.gambar.forEach(function (imageUrl, index) {
+                            const carouselItem = $("<div>").addClass("carousel-item");
+                            if (index === 0) {
+                                carouselItem.addClass("active");
+                            }
+                            const imageElement = $("<img>").addClass("d-block w-100").attr("src", imageUrl);
+                            carouselItem.append(imageElement);
+                            carouselInner.append(carouselItem);
+                        });
+                    }
+                },
+
+                error: function (xhr, status, error) {
+                    if (xhr.status === 404) {
+                        // Nomor kamar tidak ditemukan
+                        window.location.href = '404.html';
+                    } else {
+                        // Penanganan kesalahan lainnya
+                    }
+                }
+            });
+
+            // Membuat fungsi untuk menghasilkan bintang rating
+            function generateRatingStars(rating) {
+                let stars = "";
+                for (let i = 0; i < rating; i++) {
+                    stars += '<small class="fa fa-star fa-2x text-primary"></small>';
+                }
+                return stars;
+            }
+        });
+    </script>
+</body>
+
+</html>
