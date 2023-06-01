@@ -123,26 +123,28 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Nama Anda">
+                                            <input type="text" class="form-control" required id="name"
+                                                placeholder="Nama Anda">
                                             <label for="name">Nama Anda</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email"
+                                            <input type="email" required class="form-control" id="email"
                                                 placeholder="Email Anda">
                                             <label for="email">Email Anda</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                            <input type="text" required class="form-control" id="subject"
+                                                placeholder="Subject">
                                             <label for="subject">Subject</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a message here"
+                                            <textarea required class="form-control" placeholder="Leave a message here"
                                                 id="message" style="height: 150px"></textarea>
                                             <label for="message">Tulis pesan anda</label>
                                         </div>
@@ -256,7 +258,13 @@
             const subject = document.getElementById('subject').value;
             const message = document.getElementById('message').value;
 
-            const phoneNumber = '6281384504477'; // Nomor WhatsApp tujuan
+
+            if (name === "" || email === "" || subject === "" || message === "") {
+                alert("Harap isi semua field sebelum mengirim pesan.");
+                return;
+            }
+
+            const phoneNumber = '6282125223342';
             const whatsappMessage = `Assalamualaikum hai admin,\nMau kirim pesan dong\n\n\nKenalin nama aku ${name}\nIni Email Aku ${email}\nSubject: ${subject}\nPesan: ${message}`;
 
             const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(whatsappMessage)}`;

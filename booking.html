@@ -110,7 +110,8 @@
             <div class="container">
                 <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="section-title text-center text-primary text-uppercase">Pesan Kamar</h6>
-                    <h1 class="mb-5">Pesan <span class="text-primary text-uppercase" id="namaKamar">{nama kamar}</span>
+                    <h1 class="mb-5">Pesan <span class="text-primary text-uppercase" id="namaKamar">{nama
+                            kamar} </span><span id="noKamar"></span>
                     </h1>
                 </div>
                 <div class="row g-5">
@@ -133,17 +134,45 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="wow fadeInUp" data-wow-delay="0.2s">
-                            <form>
+                            <form onsubmit="sendWhatsAppMessage(event)">
+                                <input type="hidden" id="nama">
+                                <input type="hidden" id="no">
+                                <input type="hidden" id="checkin2">
+                                <input type="hidden" id="checkout2">
                                 <div class="row g-3">
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="text" disabled class="form-control" id="harga"
+                                                placeholder="Jenis Kamar">
+                                            <label for="email">Harga</label>
+                                        </div>
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Nama Anda">
+                                            <input type="text" disabled class="form-control" id="jenis"
+                                                placeholder="Jenis Kamar">
+                                            <label for="email">Jenis Kamar</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" disabled class="form-control" id="kategori"
+                                                placeholder="{kategori}">
+                                            <label for="kategori">Kategori kamar</label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" required class="form-control" id="name"
+                                                placeholder="Nama Anda">
                                             <label for="name">Nama Anda</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email"
+                                            <input type="email" required class="form-control" id="email"
                                                 placeholder="Email Anda">
                                             <label for="email">Email Anda</label>
                                         </div>
@@ -151,41 +180,41 @@
 
 
                                     <div class="col-md-6">
-                                        <div class="form-floating date" id="date3" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="checkin"
-                                                placeholder="Check In" data-target="#date3"
-                                                data-toggle="datetimepicker" />
+                                        <div class="form-floating ">
+                                            <input type="date" required class="form-control " id="checkin"
+                                                placeholder="Check In" data-toggle="datetimepicker" />
                                             <label for="checkin">Check In</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-floating date" id="date4" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="checkout"
-                                                placeholder="Check Out" data-target="#date4"
-                                                data-toggle="datetimepicker" />
+                                        <div class="form-floating ">
+                                            <input type="date" required class="form-control " id="checkout"
+                                                placeholder="Check Out" data-toggle="datetimepicker" />
                                             <label for="checkout">Check Out</label>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" disabled class="form-control" id="email" id="noKamar"
-                                                placeholder="No Kamar">
-                                            <label for="email" id="noKamar">{No Kamar}</label>
+                                            <input type="text" disabled class="form-control" id="durasi"
+                                                placeholder="Durasi">
+                                            <label for="durasi">Durasi</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" disabled class="form-control" id="name"
-                                                placeholder="{kategori}">
-                                            <label for="name" id="kategori">{kategori}</label>
+                                            <input type="text" disabled class="form-control" id="totalharga"
+                                                placeholder="Total harga">
+                                            <label for="totalharga">Total harga</label>
                                         </div>
                                     </div>
 
+
+
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Special Request" id="message"
-                                                style="height: 100px"></textarea>
+                                            <textarea class="form-control" required placeholder="Special Request"
+                                                id="message" style="height: 100px"></textarea>
                                             <label for="message">Request Lainnya</label>
                                         </div>
                                     </div>
@@ -270,8 +299,6 @@
         <!-- Footer End -->
 
 
-
-
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
@@ -292,6 +319,7 @@
     <script src="js/main.js"></script>
 
     <script>
+
         $(document).ready(function () {
             const urlParams = new URLSearchParams(window.location.search);
             let nomorKamar = urlParams.get('nomor');
@@ -305,14 +333,16 @@
                         window.location.replace("index.html");
                     } else {
                         $("#namaKamar").text(data.nama);
-                        $("#noKamar").text("Nomor " + data.nomor);
+                        $("#noKamar").text("    (" + data.nomor + ")");
                         $("#deskripsi").text(data.deskripsi + "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut euerror optio. Officia odit ratione magnam dolorum voluptatibus dolor quod nemo placeat obcaecati. ");
-                        $("#kategori").text("Kategori " + data.kategori);
-                        $("#jenis").text(data.Jenis);
-                        $("#harga").text(data.harga);
+                        $("#kategori").val(data.kategori);
+                        $("#jenis").val(data.Jenis);
+                        $("#nama").val(data.nama);
+                        $("#no").val(data.nomor);
+                        $("#harga").val(data.harga);
                         $("#status").text(data.status);
 
-                        // Mengisi gambar kamar
+
                         const carouselInner = $("#roomCarousel .carousel-inner");
                         carouselInner.empty();
                         data.gambar.forEach(function (imageUrl, index) {
@@ -332,12 +362,149 @@
                         // Nomor kamar tidak ditemukan
                         window.location.href = '404.html';
                     } else {
-                        // Penanganan kesalahan lainnya
                     }
                 }
             });
 
+
+            $("#checkin").on("change", function () {
+                var checkinValue = $("#checkin").val();
+                var checkinDate = new Date(checkinValue);
+
+                var tanggalValue = checkinDate.getDate();
+                var bulanValue = checkinDate.getMonth();
+                var tahunValue = checkinDate.getFullYear();
+
+                var namaBulan = [
+                    "Januari",
+                    "Februari",
+                    "Maret",
+                    "April",
+                    "Mei",
+                    "Juni",
+                    "Juli",
+                    "Agustus",
+                    "September",
+                    "Oktober",
+                    "November",
+                    "Desember"
+                ];
+
+                var bulan = namaBulan[bulanValue];
+
+                var hasilKonversi = tanggalValue + " " + bulan + " " + tahunValue;
+                console.log("Check In: " + hasilKonversi);
+                $("#checkin2").val(hasilKonversi)
+            });
+
+            $("#checkout").on("change", function () {
+                var checkoutValue = $("#checkout").val();
+                var checkoutDate = new Date(checkoutValue);
+
+                var tanggalValue = checkoutDate.getDate();
+                var bulanValue = checkoutDate.getMonth();
+                var tahunValue = checkoutDate.getFullYear();
+
+                var namaBulan = [
+                    "Januari",
+                    "Februari",
+                    "Maret",
+                    "April",
+                    "Mei",
+                    "Juni",
+                    "Juli",
+                    "Agustus",
+                    "September",
+                    "Oktober",
+                    "November",
+                    "Desember"
+                ];
+
+                var bulan = namaBulan[bulanValue];
+
+                var hasilKonversi = tanggalValue + " " + bulan + " " + tahunValue;
+                console.log("Check Out: " + hasilKonversi);
+                $("#checkout2").val(hasilKonversi)
+            });
+
+            let nilaiinput;
+            let totalhargas;
+            let inputInterval = setInterval(function () {
+                nilaiinput = document.getElementById("harga").value;
+
+            }, 1000);
+
+
+            $("#checkout").on("change", function () {
+                var checkinValue = $("#checkin").val();
+                var checkoutValue = $("#checkout").val();
+
+                var checkinDate = new Date(checkinValue);
+                var checkoutDate = new Date(checkoutValue);
+
+                var bulanCheckin = checkinDate.getMonth();
+                var bulanCheckout = checkoutDate.getMonth();
+
+                var tahunCheckin = checkinDate.getFullYear();
+                var tahunCheckout = checkoutDate.getFullYear();
+
+                var totalBulan = (tahunCheckout - tahunCheckin) * 12 + (bulanCheckout - bulanCheckin);
+                if (totalBulan <= 0) {
+                    totalBulan = 1;
+                    $("#durasi").val("1 Bulan");
+                } else {
+                    $("#durasi").val(totalBulan + " Bulan");
+                }
+                totalhargas = totalBulan * nilaiinput;
+                $("#totalharga").val(totalhargas)
+
+            });
+
+
+
+
+
         });
+
+
+
+
+
+        function sendWhatsAppMessage(event) {
+            event.preventDefault();
+            var nama = document.getElementById("name").value;
+            var namakamar = document.getElementById("nama").value;
+            var kategori = document.getElementById("kategori").value;
+            var jenis = document.getElementById("jenis").value;
+
+            var harga = document.getElementById("harga").value;
+            var no = document.getElementById("no").value;
+            var totalharga = document.getElementById("totalharga").value;
+            var durasi = document.getElementById("durasi").value;
+            var checkin2 = document.getElementById("checkin2").value;
+            var checkout2 = document.getElementById("checkout2").value;
+            var email = document.getElementById("email").value;
+
+            var message = "Halo Admin, Perkenalkan Nama saya " +
+                nama + " saya berminat untuk menyewa kamar kos di tempat Anda. untuk jangka waktu " +
+                durasi + " dari tanggal " + checkin2 + " hingga tanggal " +
+                checkout2 + " dengan spesifikasi kamar sebagai berikut : \n\n " +
+                "Nomor Kamar : " + no + "\n " +
+                "Nama Kamar : " + namakamar + "\n " +
+                "Kategori   : " + kategori + "\n " +
+                "Jenis      : " + jenis + "\n " +
+                "Total Harga : " + totalharga + "\n " +
+                "\nApakah kamar tersebut masih kosong? Jika iya, bisakah Anda memberikan informasi lebih lanjut? Terimakasih ";
+
+            var phoneNumber = "6281384504477";
+
+            var url = "https://api.whatsapp.com/send?phone=" + phoneNumber + "&text=" + encodeURIComponent(message);
+
+            window.open(url);
+            window.location.href = "kamar.html";
+        }
+
+
     </script>
 </body>
 

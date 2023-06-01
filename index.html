@@ -286,6 +286,7 @@
                             <p class="text-body mb-0">. Kami memiliki peralatan cuci dan pengering yang modern dan dapat
                                 diandalkan untuk memastikan pakaian Anda dicuci cepat dan efisien.
                             </p>
+
                         </a>
                     </div>
                 </div>
@@ -297,29 +298,8 @@
 
 
         <!-- Video Start -->
-        <div class="container-xxl py-5 px-0 wow zoomIn" data-wow-delay="0.1s">
-            <div class="row g-0">
-                <div class="col-md-6 bg-dark d-flex align-items-center">
-                    <div class="p-5">
-                        <h6 class="section-title text-start text-white text-uppercase mb-3">Kamar Unggulan</h6>
-                        <h1 class="text-white">Kamar Tipe A (20)</h1>
-                        <h2 class="text-white mb-4">Kategori pria</h2>
-                        <p class="text-white mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-                            diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo
-                            magna dolore erat amet</p>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Lihat Kamar</a>
-                        <a href="" class="btn btn-light py-md-3 px-md-5">Pesan Kamar</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="video">
-                        <button type="button" class="btn-play" data-bs-toggle="modal"
-                            data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
-                            <span></span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div id="data-container">
+
         </div>
 
         <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -332,13 +312,17 @@
                     <div class="modal-body">
                         <!-- 16:9 aspect ratio -->
                         <div class="ratio ratio-16x9">
-                            <iframe class="embed-responsive-item" src="" id="video" allowfullscreen
-                                allowscriptaccess="always" allow="autoplay"></iframe>
+
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/2BXRs1nmr6Q"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Video Start -->
 
 
@@ -608,7 +592,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: "https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/kamar/pria/tersedia/limit",
+                url: "https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/web/get/kamar/recomended",
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (i, objek) {
@@ -666,6 +650,51 @@
                 }
             });
         });
+
+        $(document).ready(function () {
+            // Lakukan permintaan AJAX untuk mengambil data JSON
+            $.ajax({
+                url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/web/get/kamar/mewah',
+                dataType: 'json',
+                success: function (data) {
+                    var html = '';
+                    $.each(data, function (index, item) {
+                        html += '<div class="container-xxl py-5 px-0 wow zoomIn" data-wow-delay="0.1s">';
+                        html += '<div class="row g-0">';
+                        html += '<div class="col-md-6 bg-dark d-flex align-items-center">';
+                        html += '<div class="p-5">';
+                        html += '<h6 class="section-title text-start text-white text-uppercase mb-3">Kamar Unggulan</h6>';
+                        html += '<h1 class="text-white">' + item.nama + ' (' + item.nomor + ')</h1>';
+                        html += '<h2 class="text-white mb-4"> Kategori ' + item.kategori + '</h2>';
+                        html += '<p class="text-white mb-4">' + item.deskripsi + '</p>';
+                        html += '<a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Lihat Kamar</a>';
+                        html += '<a href="" class="btn btn-light py-md-3 px-md-5">Pesan Kamar</a>';
+                        html += '</div></div>';
+                        html += '<div class="col-md-6">';
+                        html += '<div class="video">';
+                        html += '<button type="button" class="btn-play" data-bs-toggle="modal" data-src="#" data-bs-target="#videoModal">';
+                        html += '<span></span>';
+                        html += '</button>';
+                        html += '</div></div>';
+                        html += '</div></div>';
+                    });
+                    $('#data-container').html(html);
+                }
+            });
+            $(document).on("show.bs.modal", "#videoModal", function (event) {
+                var button = $(event.relatedTarget);
+                var videoSrc = button.data('src');
+                var iframe = $('#video');
+                iframe.attr('src', videoSrc);
+            });
+
+            $(document).on("hidden.bs.modal", "#videoModal", function () {
+                var iframe = $('#video');
+                iframe.attr('src', '');
+            });
+        });
+
+
     </script>
 </body>
 
