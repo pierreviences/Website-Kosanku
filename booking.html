@@ -485,6 +485,34 @@
             var checkout2 = document.getElementById("checkout2").value;
             var email = document.getElementById("email").value;
 
+            var data = {
+                "nama": $('#name').val(),
+                "email": $('#email').val(),
+                "no_kamar": $('#no').val(),
+                "nama_kamar": $('#nama').val(),
+                "kategori": $('#kategori').val(),
+                "checkin": $('#checkin2').val(),
+                "checkout": $('#checkout2').val(),
+                "durasi": $('#durasi').val(),
+                "total_harga": $('#totalharga').val(),
+                "pesan": $('#message').val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/web/tambah/booking",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    console.log(response);
+                    // Lakukan tindakan lain setelah sukses mengirim data
+                },
+                error: function (error) {
+                    console.log(error);
+                    // Tangani error yang terjadi
+                }
+            });
+
             var message = "Halo Admin, Perkenalkan Nama saya " +
                 nama + " saya berminat untuk menyewa kamar kos di tempat Anda. untuk jangka waktu " +
                 durasi + " dari tanggal " + checkin2 + " hingga tanggal " +

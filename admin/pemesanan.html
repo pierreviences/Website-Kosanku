@@ -119,8 +119,29 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h4 class="card-title">Data Pemesanan</h4>
-                                    <!-- data user dinamis -->
-                                    <div id="dynamic-table"></div>
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th>Nama User</th>
+                                                    <th>Email</th>
+                                                    <th>Nomor Kamar</th>
+                                                    <th>Nama Kamar</th>
+                                                    <th>Kategori</th>
+                                                    <th>Checkin</th>
+                                                    <th>Checkout</th>
+                                                    <th>Durasi</th>
+                                                    <th>Total Harga</th>
+                                                    <th>Pesan Request</th>
+                                                    <th>Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="dynamic-data">
+                                                <!-- Data will be dynamically inserted here -->
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -156,6 +177,69 @@
     <!-- End custom js for this page-->
 
     <script>
+
+        $(document).ready(function () {
+            $.ajax({
+                url: "https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/web/get/pemesanan", // Ganti URL dengan URL endpoint API Anda
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response)
+                    if (response.success) {
+                        var tableData = "";
+                        var nomor = 1;
+                        $.each(response.data, function (index, booking) {
+
+                            var row = '<tr>' +
+                                '<td>' + nomor + '</td>' +
+                                '<td>' + booking.nama + '</td>' +
+                                '<td>' + booking.email + '</td>' +
+                                '<td>' + booking.no_kamar + '</td>' +
+                                '<td>' + booking.nama + '</td>' +
+                                '<td>' + booking.kategori + '</td>' +
+                                '<td>' + booking.checkin + '</td>' +
+                                '<td>' + booking.checkout + '</td>' +
+                                '<td>' + booking.durasi + '</td>' +
+                                '<td>' + booking.total_harga + '</td>' +
+                                '<td>' + booking.pesan + '</td>' +
+                                '<td>' +
+                                '<a style="margin-left: 20px;" class="btn btn-sm btn-outline-info btn-fw btnDelete"  data-id="' + booking.id_booking + '" href="#" onclick="return confirmDelete(this)">Hapus</a>' +
+                                '</td>' +
+                                '</tr>';
+                            tableData += row;
+                            nomor++;
+                        });
+
+                        $("#dynamic-data").html(tableData);
+                    } else {
+                        $("#dynamic-data").html("Gagal memuat data.");
+                    }
+                },
+                error: function () {
+                    $("#dynamic-data").html("Terjadi kesalahan dalam memuat data.");
+                }
+            });
+        });
+
+        function confirmDelete(element) {
+            var id = $(element).data('id');
+            var confirmation = confirm("Anda yakin ingin menghapus pengguna dengan id " + id + "?");
+            if (confirmation) {
+                $.ajax({
+                    url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/web/booking?id_booking=' + id,
+                    type: 'DELETE',
+                    success: function (response) {
+                        console.log(response);
+                        // Refresh atau lakukan tindakan lain setelah penghapusan berhasil
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            }
+            return false; // Mencegah tindakan href default
+        }
         $(document).ready(function () {
             var token = sessionStorage.getItem("token");
 
