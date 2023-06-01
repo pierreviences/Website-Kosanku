@@ -56,11 +56,10 @@
     <script>
         $(document).ready(function () {
             $("#loginForm").submit(function (event) {
-                event.preventDefault(); // Mencegah pengiriman formulir secara default
+                event.preventDefault();
 
                 var email = $("#email").val();
                 var password = $("#password").val();
-                // Mengirim permintaan AJAX ke endpoint login
                 $.ajax({
                     url: "https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/web/loginAdmin",
                     type: "POST",
@@ -72,10 +71,10 @@
                     success: function (response) {
                         console.log(response.success)
                         if (response.success) {
-                            // Jika login berhasil, simpan token ke penyimpanan sementara
+
                             sessionStorage.setItem("token", response.token);
 
-                            // Alihkan ke halaman admin
+
                             window.location.href = "index.html";
                         } else {
                             alert(response.message);
