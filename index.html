@@ -63,7 +63,7 @@
                                 <a href="index.html" class="nav-item nav-link active">Beranda</a>
                                 <a href="myapp.html" class="nav-item nav-link">My App</a>
                                 <a href="kamar.html" class="nav-item nav-link">Kamar</a>
-                                <a href="kontak.html" class="nav-item nav-link">kontak</a>
+                                <a href="kontak.html" class="nav-item nav-link">Kontak</a>
                             </div>
                         </div>
                     </nav>
@@ -311,10 +311,11 @@
                     </div>
                     <div class="modal-body">
                         <!-- 16:9 aspect ratio -->
-                        <div class="ratio ratio-16x9">
+                        <div class="ratio ratio-16x9" id="videoytBungkus">
 
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/2BXRs1nmr6Q"
-                                title="YouTube video player" frameborder="0"
+                            <iframe width="560" id="videoyt" height="315"
+                                src="https://www.youtube.com/embed/2BXRs1nmr6Q" title="YouTube video player"
+                                frameborder="0"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                                 allowfullscreen></iframe>
                         </div>
@@ -652,7 +653,6 @@
         });
 
         $(document).ready(function () {
-            // Lakukan permintaan AJAX untuk mengambil data JSON
             $.ajax({
                 url: 'https://ap-southeast-1.aws.data.mongodb-api.com/app/kosanku-auwfb/endpoint/web/get/kamar/mewah',
                 dataType: 'json',
@@ -692,6 +692,17 @@
                 var iframe = $('#video');
                 iframe.attr('src', '');
             });
+        });
+
+        var videoModal = document.getElementById('videoModal');
+        var videoyt = document.getElementById('videoyt');
+
+        videoModal.addEventListener('hide.bs.modal', function () {
+            videoyt.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+        });
+        var videoytBungkus = document.getElementById('videoytBungkus');
+        videoModal.addEventListener('hide.bs.modal', function () {
+            videoytBungkus.innerHTML = '';
         });
 
 
